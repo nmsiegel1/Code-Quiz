@@ -1,59 +1,58 @@
 var timeLeft = 100;
 var timerEl = document.querySelector("#timer");
 var startButtonEl = document.querySelector(".start-button");
+var nextButton = document.getElementById("next-btn");
 var mainEl = document.querySelector(".questions");
 var listEl = document.querySelector(".answers");
-var questionEl = document.getElementById("quiz-content");
+var quizContentEl = document.getElementById("quiz-content");
+var questionEl = document.getElementById("question");
+var answerButtonEl = document.getElementById("answer-btns");
+var shuffledQuestions, currentQuestionIndex;
 var questionsObj = [
     {
-        question1: "Which of the following functions is a valid type of function that JavaScript supports?",
+        question: "Which of the following functions is a valid type of function that JavaScript supports?",
         answers: [
-            "named functions",
-            "anonymous functions",
-            "both named and anonymous functions",
-            "none of the above"
+            {text: "named functions", correct: false},
+            {text: "anonymous functions", correct: false},
+            {text: "both named and anonymous functions", correct: true},
+            {text: "none of the above", correct: false}
         ],
-        correct: "both named and anonymous functions"
+     },
+    {
+        quesiton: "The condition in an if/else statement is enclosed within ____?",
+        answers: [
+            {text: "curly brackets", correct: true},
+            {text: "quotes", correct: false},
+            {text: "parenthesis", correct: false},
+            {text: "straight brackets", correct: false}
+        ],
     },
     {
-        quesiton2: "The condition in an if/else statement is enclosed within ____?",
+        question: "Arrays in JavaScript can be used to store____?",
         answers: [
-            "curly brackets",
-            "quotes",
-            "parenthesis",
-            "straight brackets"
+            {text: "numbers and strings", correct: false},
+            {text: "other arrays", correct: false},
+            {text: "booleans", correct: false},
+            {text: "all of the above", correct: true}
         ],
-        correct: "curly brackets"
     },
     {
-        question3: "Arrays in JavaScript can be used to store____?",
+        question: "Which of the following statements is true about JavaScript?",
         answers: [
-            "numbers and strings",
-            "other arrays",
-            "booleans",
-            "all of the above"
+            {text: "It is a scripting lanquage used to make websites interactive", correct: true},
+            {text: "It is an advanced version of Java for Desktop and Mobile application development", correct: false},
+            {text: "It is a markup langage of Java to develop webpages", correct: false},
+            {text: "All of the above",  correct: false}
         ],
-        correct: "all of the above"
     },
     {
-        question4: "Which of the following statements is true about JavaScript?",
+        question: "In JavaScript, multi-line comments are marked with _____",
         answers: [
-            "It is a scripting lanquage used to make websites interactive",
-            "It is an advanced version of Java for Desktop and Mobile application development",
-            "It is a markup langage of Java to develop webpages",
-            "All of the above"
+            {text: "/* and */", correct: true},
+            {text: "<!—and -->", correct: false},
+            {text: "## and ##", correct: false},
+            {text: "// and //", correct: false}
         ],
-        correct: "It is a scripting language used to make websites interactive"
-    },
-    {
-        question5: "In JavaScript, multi-line comments are marked with _____",
-        answers: [
-            "/* and */",
-            "<!—and -->",
-            "## and ##",
-            "// and //"
-        ],
-        correct: "/* and */"
     },
 ]
 
@@ -73,7 +72,7 @@ function countDown() {
 };
 
 // quiz function
-function startQuiz() {
+function startGame() {
     var mainTitle = document.querySelector(".main-title");
     mainTitle.remove();
     var mainSubtitle = document.querySelector(".main-subtitle");
@@ -81,17 +80,49 @@ function startQuiz() {
     var instructions = document.querySelector(".instructions");
     instructions.remove();
     startButtonEl.remove();
-    questionEl.classList.remove("hide");
+    quizContentEl.classList.remove("hide");
+    shuffledQuestions = questionsObj.sort(() => Math.random() - .5);
+    currentQuestionIndex = 0;
 
-
-
+    setNextQuestion();
 };
 
-function quizQuestions() {
-for(var i=0; i < questionsObj.length; i++) {
-    questionEl = questionArr[i]
-    }
+function setNextQuestion() {
+    resetState();
+    showQuestion(shuffledQuestions[currentQuestionIndex])
+}
+
+function showQuestion(question) {
+    questionEl.innerText = question.question;
+    question.answers.forEach(answer => {
+        const button = document.createElement("button");
+        button.innerText = answer.text;
+        button.classList.add('btn');
+
+        if (answer.correct) {
+            button.dataset.correct = answer.correct;
+        }
+        button.addEventListener("click", selectAnswer)
+        answerButtonEl.appendChild(button);
+    })
 };
+
+function resetState () {
+    // nextButton.classList.add('hide');
+    // while (answerButtonEl.firstChild) {
+    //     answerButtonEl.removeChild;
+    //     (answerButtonEl.firstChild)
+    // }
+};
+
+function selectAnswer(e) {
+
+};
+// function quizQuestions() {
+// for(var i=0; i < questionsObj.length; i++) {
+//     questionEl = questionArr[i]
+//     }
+// };
 
 
 
@@ -99,7 +130,7 @@ for(var i=0; i < questionsObj.length; i++) {
 
 // start quiz event listener
 startButtonEl.addEventListener("click", function() {
-    console.log("click");
     countDown();
-    startQuiz();
+    startGame();
+    setNextQuestion();
 });
