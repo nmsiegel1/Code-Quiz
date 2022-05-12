@@ -129,3 +129,23 @@ header {
 .hide {
     display: none;
 }
+
+.score {
+    padding: 100px;}
+
+.quiz-complete {
+    color: var(--secondary-color);
+    font-size: 40px;
+    padding: 10px;
+}
+
+.final-score {
+    font-size: 25px;
+    padding: 10px;
+}
+
+.initials {
+    padding: 10px;
+    font-size: 20px;
+}
+
