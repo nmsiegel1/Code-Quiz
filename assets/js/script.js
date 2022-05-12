@@ -7,6 +7,7 @@ var listEl = document.querySelector(".answers");
 var quizContentEl = document.getElementById("quiz-content");
 var questionEl = document.getElementById("question");
 var answerButtonEl = document.getElementById("answer-btns");
+var messageEl = document.getElementById("message");
 var shuffledQuestions, currentQuestionIndex;
 var questionsObj = [
     {
@@ -19,7 +20,7 @@ var questionsObj = [
         ],
      },
     {
-        quesiton: "The condition in an if/else statement is enclosed within ____?",
+        question: "The condition in an if/else statement is enclosed within ____?",
         answers: [
             {text: "curly brackets", correct: true},
             {text: "quotes", correct: false},
@@ -101,30 +102,84 @@ function showQuestion(question) {
 
         if (answer.correct) {
             button.dataset.correct = answer.correct;
+            // messageEl.innerText = "Correct!";
         }
+        //  else {
+        //     messageEl.innerText = "Sorry, thats not right.";
+        // }
         button.addEventListener("click", selectAnswer)
         answerButtonEl.appendChild(button);
     })
 };
 
 function resetState () {
-    // nextButton.classList.add('hide');
-    // while (answerButtonEl.firstChild) {
-    //     answerButtonEl.removeChild;
-    //     (answerButtonEl.firstChild)
-    // }
+    nextButton.classList.add('hide');
+    messageEl.classList.add("hide");
+    while (answerButtonEl.firstChild) {
+        answerButtonEl.removeChild
+        (answerButtonEl.firstChild)
+    }
 };
 
 function selectAnswer(e) {
-
+    var selectedButton = e.target;
+    var correct = selectedButton.dataset.correct;
+    var answerCorrect = selectedButton.dataset.true;
+    setStatusClass(document.body, correct);
+    Array.from(answerButtonEl.children).forEach(button => {
+        setStatusClass(button, button.dataset.correct)
+    })
+    if (shuffledQuestions.length > currentQuestionIndex + 1) {
+        nextButton.classList.remove("hide");
+        messageEl.classList.remove("hide");
+    }
+    //  if (answerCorrect) {
+    //     messageEl.innerText = "Correct!";
+    // }else {
+    //     messageEl.innerText = "Sorry, that's not right!";
+    // }
+    //  {
+    //     // quizContentEl.classList.add("hide");
+    //     // submitScore(timeLeft)
+    // }
 };
-// function quizQuestions() {
-// for(var i=0; i < questionsObj.length; i++) {
-//     questionEl = questionArr[i]
-//     }
-// };
 
 
+function setStatusClass(element, correct) {
+    clearStatusClass(element)
+    if (correct) {
+        element.classList.add("correct");
+        
+    } else {
+        element.classList.add("wrong");
+        // messageEl.innerText = "Sorry, thats not right.";
+        // return false;
+        // timeLeft = timeLeft - 20;
+    }
+};
+
+function clearStatusClass(element) {
+    element.classList.remove("correct");
+    element.classList.remove("wrong");
+}
+
+// function submitScore(highScore) {
+//     var headingEl = document.createElement("h2");
+//     headingEl.textContent = "All done!";
+//     headingEl.setAttribute("class", "question");
+
+//     var pEl = document.createElement("p");
+//     pEl.textContent = "Your high score is " + highScore + ".";
+//     pEl.setAttribute("class", "high-score-text");
+
+// }
+
+
+// next question event listener 
+nextButton.addEventListener("click", () =>{
+    currentQuestionIndex++;
+    setNextQuestion();
+});
 
 
 
