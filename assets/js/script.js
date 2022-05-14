@@ -69,9 +69,10 @@ function countDown() {
             timerEl.textContent = "Timer: " + timeLeft;
             timeLeft--;
         } else {
-            timerEl.textContent ="Timer: " + "";
+            timerEl.textContent ="Timer: " + "0";
             clearInterval(timeInterval);
-        }
+            window.open("./highscores.html", "_self")
+        };
     }, 1000);
 };
 
