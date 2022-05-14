@@ -80,7 +80,7 @@ header {
 
 .start-button:hover {
     background-color: var(--button-color);
-    color: var(--background-color);
+    color: var(--text-color);
 }
 
 /* styling for questions begins  */
@@ -117,19 +117,20 @@ header {
 }
 
 .btn.correct {
-    background-color: var(--tertiary-color);
-    border-color: var(--tertiary-color);
+    background-color: #4ef70bb5;
+    border-color: #4ef70bb5;
 }
 
 .btn.wrong {
-    background-color: red;
-    border-color: red;
+    background-color: rgba(240, 42, 42, 0.588);
+    border-color: rgba(240, 42, 42, 0.588);
 }
 
 .hide {
     display: none;
 }
 
+/* score page styling begins*/
 .score {
     padding: 100px;}
 
