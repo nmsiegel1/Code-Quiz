@@ -61,7 +61,7 @@ var questionsObj = [
 ]
 
 // begin functions
-// timer function
+// timer/countdown function
 function countDown() {
     // variable for the start time
     var timeInterval = setInterval(function() {
@@ -75,7 +75,7 @@ function countDown() {
     }, 1000);
 };
 
-// quiz function
+// removes the intro page, makes the question page visible and makes the questions random
 function startGame() {
     var mainTitle = document.querySelector(".main-title");
     mainTitle.remove();
@@ -91,11 +91,13 @@ function startGame() {
     setNextQuestion();
 };
 
+// function runs a couple other functions that will clear the old questions and shuffle the questions to display the next one
 function setNextQuestion() {
     resetState();
     showQuestion(shuffledQuestions[currentQuestionIndex])
 }
 
+// puts the new question and answer on the page
 function showQuestion(question) {
     questionEl.innerText = question.question;
     question.answers.forEach(answer => {
@@ -111,6 +113,7 @@ function showQuestion(question) {
     })
 };
 
+// clears the old question to set up for the next one
 function resetState () {
     nextButton.classList.add('hide');
     messageEl.classList.add("hide");
@@ -120,6 +123,8 @@ function resetState () {
     }
 };
 
+// the function for actually selecting the answers. Depending on which answer you select it will display a message, and deduct time.
+// once all of the questions are complete it will present the score button and that takes you to the next page
 function selectAnswer(e) {
     var selectedButton = e.target;
     var correct = selectedButton.dataset.correct;
@@ -148,7 +153,7 @@ function selectAnswer(e) {
     }
 };
 
-
+// changes the color of the buttons when you select them 
 function setStatusClass(element, correct) {
     clearStatusClass(element)
     if (correct) {
@@ -159,30 +164,33 @@ function setStatusClass(element, correct) {
     }
 };
 
+// removes the button colors before the next question
 function clearStatusClass(element) {
     element.classList.remove("correct");
     element.classList.remove("wrong");
 }
 
+// takes you to the score page where you get your final score and can submit your initials. 
+// also contains all of the logic for local storage
 function submitScore() {
     var highScore = timeLeft
     quizContentEl.classList.add("hide");
     quizCompleteEl.classList.remove("hide");
     var headingEl = document.querySelector(".quiz-complete");
-    headingEl.textContent = "All done!";
+    headingEl.textContent = "Woo, all done!";
     var scoreEl = document.getElementById("final-score");
     scoreEl.textContent = "Your score is " + timeLeft;
     var submitEl = document.getElementById("user-name");
-   
-    if (scoreEl.value !== null) {
+
+    if (submitEl.value !== null) {
         var userScoreArray = JSON.parse(window.localStorage.getItem("userScoreArray")) || [];
         submitButtonEl.addEventListener("click", function (event) {
         event.preventDefault();
-        var userNameEl = submitEl.text;
+        var userName = submitEl.value;
         console.log(submitEl);
         var userScore = {
                 score: highScore,
-                name: userNameEl
+                name: userName
         };
             // set new submission to local storage
         userScoreArray.push(userScore);
@@ -192,15 +200,17 @@ function submitScore() {
     }
 };
 
+
+// event listeners
+
 // score button event listener
 scoreButton.addEventListener("click", submitScore);
 
-// next question event listener 
+// next question event listener
 nextButton.addEventListener("click", () =>{
     currentQuestionIndex++;
     setNextQuestion();
 });
-
 
 
 // start quiz event listener

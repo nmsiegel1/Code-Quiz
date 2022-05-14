@@ -1,0 +1,78 @@
+:root {
+    --background-color: rgb(20, 19, 19);
+    --primary-color: #f16cf3;
+    --secondary-color: #4dd5c5;
+    --tertiary-color: #6bf136;
+    --button-color: #7b35bd;
+    --text-color: white;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: var(--background-color);
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+.high-scores {
+        height: 450px;
+        width: 75%;
+        display: flex;
+        flex-wrap: wrap;
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+        margin: 10%;
+        border: 1px solid var(--tertiary-color);
+        box-shadow: 0 0 10px var(--tertiary-color);
+        padding: 10px;
+        color: var(--text-color);
+        justify-content: space-evenly;
+}
+
+h1 {
+    font-size: 50px;
+    color: var(--primary-color);
+}
+
+.btn {
+    border: 1px solid var(--button-color);
+    background-color: var(--background-color);
+    border-radius: 5px;
+    padding: 5px 10px;
+    color: var(--text-color);
+    outline: none;
+    font-size: 20px;
+}
+
+.btn:hover {
+    background-color: var(--button-color);
+}
+
+.scores-ol {
+    width: 80%;
+    height: 200px;
+}
+
+.scores-li {
+    text-align: left;
+    font-size: 30px;
+    padding: 3px;
+    color: var(--secondary-color);
+    margin-left: 45%;
+}
+
+.buttons {
+    display: flex;
+    justify-content: space-between;
+    gap: 30px;
+}
