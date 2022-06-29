@@ -1,4 +1,4 @@
-# Nina-Siegel-Code-Quiz
+# Code-Quiz
 
 ## Purpose 
 
