@@ -17,7 +17,7 @@ The purpose of this website is to create a functioning quiz about JavaScript wit
 * When the game is over you enter your initials to be submitted to the high scores list.  
 
 ## Website
-https://nmsiegel1.github.io/Nina-Siegel-Code-Quiz/
+https://nmsiegel1.github.io/Code-Quiz/
 
 ## Screenshots
 <img width="1423" alt="Screen Shot 2022-05-13 at 10 03 59 PM" src="https://user-images.githubusercontent.com/102773691/168406927-1d04a2de-272d-4b53-b212-ceaf13a51cb1.png">
